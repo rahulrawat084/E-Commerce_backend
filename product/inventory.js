@@ -3,7 +3,7 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const Inventory=require('./inventory.model.js');
-const Product = require('../product/product.model.js');
+const Product = require('./product.model.js');
 const inventoryModel = require('./inventory.model.js');
  
 
