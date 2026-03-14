@@ -16,7 +16,7 @@
       const PaymentRoute = require("./payment.js");   
        const emailRoute = require("./emailmgt.js");
        const emailactivationRoute=require("./emailactivation.js");      
-       const inventoryRoute = require("./product/Inventory.route.js");
+       const inventoryRoute = require("./product/inventory.route.js");
        const saleRoute = require("./vender/sales.route.js");
        const path = require("path");  
 

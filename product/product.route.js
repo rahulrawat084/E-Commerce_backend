@@ -6,7 +6,7 @@
      const path = require('path');
      const fs = require('fs');
      const mongoose = require('mongoose');
-   const {createInventoryForNewProduct} = require('./Inventory.route.js');
+   const {createInventoryForNewProduct} = require('./inventory.route.js');
 
 
      // STORAGE SETUP
