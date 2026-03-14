@@ -2,7 +2,8 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Inventory=require('./inventory.model.js');
+// const Inventory=require("./inventory.model.js");
+const Inventory = require('./inventory.model.js');
 const Product = require('./product.model.js');
 // const inventoryModel = require('./temp.js');
  
