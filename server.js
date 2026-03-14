@@ -1,58 +1,65 @@
-   
-   const express = require('express');
+const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();   // 👈 added
+require('dotenv').config();
 
-const PORT = process.env.PORT || 9876;  // 👈 updated
-const mongoose = require('mongoose');
+const PORT = process.env.PORT || 9876;
 
+// DATABASE CONNECTION
+const connectDB = require('./DB.js');
+
+// ROUTES
 const stateRoute = require('./admin/state.route.js');
 const cityRoute = require('./admin/city.route.js');
 const productcatgRoute = require("./admin/productcatg.route.js");
 const productRoute = require("./product/product.route.js");
-const venderRoute=require("./vender/vender.route.js");
-const customerRoute=require('./customer/customer.route.js');
+const venderRoute = require("./vender/vender.route.js");
+const customerRoute = require('./customer/customer.route.js');
 const billRoute = require("./admin/bills/bill.route.js");
 const paymentdetailsRoute = require("./admin/bills/paymentdetails.route.js");
-const PaymentRoute = require("./payment.js");   
+const PaymentRoute = require("./payment.js");
 const emailRoute = require("./emailmgt.js");
-const emailactivationRoute=require("./emailactivation.js");      
+const emailactivationRoute = require("./emailactivation.js");
 const inventoryRoute = require("./product/inventory.route.js");
 const saleRoute = require("./vender/sales.route.js");
-const path = require("path");  
 
+const path = require("path");
+
+
+// CONNECT DATABASE
+connectDB();
+
+
+// MIDDLEWARE
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/state',stateRoute);
-app.use('/city',cityRoute);
-app.use('/productcatg',productcatgRoute);
+
+// ROUTES
+app.use('/state', stateRoute);
+app.use('/city', cityRoute);
+app.use('/productcatg', productcatgRoute);
 app.use("/product", productRoute);
-app.use('/customer',customerRoute);
-app.use("/payment",PaymentRoute);
-app.use('/vender',venderRoute);
-app.use('/bill',billRoute);
-app.use('/paymentdetails',paymentdetailsRoute);
-app.use("/email",emailRoute);
-app.use("/emailactivation",emailactivationRoute);
-app.use("/sales",saleRoute);
-app.use("/inventory",inventoryRoute);
-app.use("/productimages",express.static(path.join(__dirname,"product/productimages")));
+app.use('/customer', customerRoute);
+app.use("/payment", PaymentRoute);
+app.use('/vender', venderRoute);
+app.use('/bill', billRoute);
+app.use('/paymentdetails', paymentdetailsRoute);
+app.use("/email", emailRoute);
+app.use("/emailactivation", emailactivationRoute);
+app.use("/sales", saleRoute);
+app.use("/inventory", inventoryRoute);
 
-// 👇 MongoDB Atlas Connection
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    console.log("DATABASE IS CONNECTED");
-})
-.catch((err) => {
-    console.log("CAN NOT CONNECT TO THE DATABASE", err);
-});
 
-app.listen(PORT,function (){
-    console.log("SERVER IS RUNNING ON PORT="+PORT);
+// STATIC IMAGE FOLDER
+app.use("/productimages", express.static(path.join(__dirname, "product/productimages")));
+
+
+// SERVER START
+app.listen(PORT, function () {
+    console.log("SERVER IS RUNNING ON PORT=" + PORT);
 });
 
 
