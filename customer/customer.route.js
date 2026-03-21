@@ -8,6 +8,7 @@
      const path = require("path");
 
      
+     
 
 
       //  ENSURE IMAGE FOLDER EXISTS
@@ -75,6 +76,8 @@
 
             customerRoute.post("/login", async(req,res)=>{
                 const {CUserId, CUserPass} = req.body;
+                    console.log("BODY:", req.body);   // 👈 ADD THIS
+
 
                 try
                 {
@@ -345,6 +348,11 @@
                   res.status(500).json({message:"Server Error"});
                  }
 
+
+                  });
+
+          module.exports = customerRoute;
+
 //                  // EMAIL SEND MESSAGE 
 
 //                  customerRoute.post("/emailactivation/send", async (req,res)=>{
@@ -372,10 +380,7 @@
 //   }
 // });
 
-          });
-
-          module.exports = customerRoute;
-
+        
 
 
 
